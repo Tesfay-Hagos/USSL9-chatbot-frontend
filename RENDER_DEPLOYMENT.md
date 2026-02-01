@@ -2,7 +2,7 @@
 
 ## Prerequisites
 
-✅ Backend deployed at: `https://univr-chatbot-backend.onrender.com`
+✅ Backend deployed (e.g. `https://ussl9-chatbot-backend.onrender.com`)
 
 ---
 
@@ -13,15 +13,16 @@
 1. Go to [Render Dashboard](https://dashboard.render.com)
 2. Click **"New"** → **"Web Service"** (NOT Blueprint - to avoid payment card requirement)
 3. Connect your GitHub account if not already connected
-4. Select repository: `RAG-based-chatbot`
+4. Select repository: `USSL9-chatbot-frontend` (this repo)
 5. Select branch: `main`
 
 ### 2. Basic Settings
 
 **Name:**
 ```
-univr-chatbot-frontend
+ussl9-chatbot-frontend
 ```
+(or any name you prefer)
 
 **Region:**
 ```
@@ -31,9 +32,9 @@ Oregon (US West)
 
 **Root Directory:**
 ```
-univr-chatbot-front
+(Leave EMPTY)
 ```
-⚠️ **Important:** Set this to your frontend folder name
+⚠️ **Important:** This repo is the chatbot frontend only. Leave Root Directory **empty**.
 
 **Branch:**
 ```
@@ -63,7 +64,7 @@ Add this environment variable in Render dashboard:
 
 | Variable Name | Value |
 |--------------|-------|
-| `NEXT_PUBLIC_API_URL` | `https://univr-chatbot-backend-1.onrender.com/api` |
+| `NEXT_PUBLIC_API_URL` | `https://your-backend.onrender.com/api` |
 
 ⚠️ **Important:** 
 - The variable name must start with `NEXT_PUBLIC_` for Next.js to expose it to the browser
@@ -77,7 +78,7 @@ Click **"Create Web Service"** and Render will:
 2. Install dependencies (`npm install`)
 3. Build your Next.js app (`npm run build`)
 4. Start the production server (`npm start`)
-5. Provide a public URL (e.g., `https://univr-chatbot-frontend.onrender.com`)
+5. Provide a public URL (e.g., `https://ussl9-chatbot-frontend.onrender.com`)
 
 ---
 
@@ -94,7 +95,7 @@ Click **"Create Web Service"** and Render will:
 ### Verify Backend Connection
 
 If you see errors, check:
-1. Backend is running: `https://univr-chatbot-backend.onrender.com/health`
+1. Backend is running: `https://your-backend.onrender.com/health`
 2. Environment variable is set correctly in Render dashboard
 3. Check browser console for CORS or API errors
 

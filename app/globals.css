@@ -6,11 +6,18 @@
 
 /* ===== CSS Variables ===== */
 :root {
-  /* UniVR Brand Colors */
+  /* UniVR / legacy */
   --univr-red: #B91C1C;
   --univr-red-light: #DC2626;
   --univr-red-dark: #991B1B;
   --univr-gold: #D4A34A;
+  /* ULSS 9 Scaligera – aulss9.veneto.it style */
+  --ulss9-primary: #0066A1;
+  --ulss9-primary-dark: #004D7A;
+  --ulss9-primary-light: #0080CC;
+  --ulss9-green: #00875A;
+  --ulss9-green-light: #00A86B;
+  --ulss9-dark: #1a365d;
 }
 
 /* ===== Base Styles ===== */

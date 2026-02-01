@@ -264,7 +264,7 @@ export default function ChatInterface({
 
   const formatMessage = (text: string) => {
     return text
-      .replace(/\*\*(.+?)\*\*/g, '<strong class="text-univr-red dark:text-univr-red-light">$1</strong>')
+      .replace(/\*\*(.+?)\*\*/g, '<strong class="text-ulss9-primary dark:text-ulss9-primary-light">$1</strong>')
       .replace(/\*(.+?)\*/g, '<em>$1</em>')
       .replace(/\n/g, '<br>');
   };
@@ -283,7 +283,7 @@ export default function ChatInterface({
             {onBackToHome ? (
               <button
                 onClick={onBackToHome}
-                className="flex items-center gap-2 text-slate-600 dark:text-slate-400 hover:text-univr-red transition-colors"
+                className="flex items-center gap-2 text-slate-600 dark:text-slate-400 hover:text-ulss9-primary dark:hover:text-ulss9-primary-light transition-colors"
               >
                 <span className="text-xl">←</span>
                 <span className="font-medium">Home</span>
@@ -308,7 +308,7 @@ export default function ChatInterface({
               <button
                 type="button"
                 onClick={handleNewChat}
-                className="text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-univr-red dark:hover:text-univr-red-light transition-colors"
+                className="text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-ulss9-primary dark:hover:text-ulss9-primary-light transition-colors"
               >
                 {chosenLanguage === 'en' ? 'New chat' : 'Nuova chat'}
               </button>
@@ -333,7 +333,7 @@ export default function ChatInterface({
               <button
                 type="button"
                 onClick={handleNewChat}
-                className="text-xs font-medium text-slate-500 dark:text-slate-400 hover:text-univr-red dark:hover:text-univr-red-light transition-colors"
+                className="text-xs font-medium text-slate-500 dark:text-slate-400 hover:text-ulss9-primary dark:hover:text-ulss9-primary-light transition-colors"
               >
                 {chosenLanguage === 'en' ? 'New chat' : 'Nuova chat'}
               </button>
@@ -351,7 +351,7 @@ export default function ChatInterface({
                 <button
                   type="button"
                   onClick={() => handleLanguageChoose('it')}
-                  className="px-6 py-3 rounded-xl font-medium bg-gradient-to-r from-univr-red to-univr-red-dark text-white
+                  className="px-6 py-3 rounded-xl font-medium bg-gradient-to-r from-ulss9-primary to-ulss9-primary-dark text-white
                            hover:shadow-lg hover:scale-105 transition-all"
                 >
                   Italiano
@@ -377,7 +377,7 @@ export default function ChatInterface({
               <div
                 className={`rounded-full flex items-center justify-center flex-shrink-0 shadow-md ${
                   message.sender === 'user'
-                    ? 'bg-gradient-to-br from-univr-red to-univr-red-dark text-white'
+                    ? 'bg-gradient-to-br from-ulss9-primary to-ulss9-primary-dark text-white'
                     : 'glass-panel'
                 } ${embedded ? 'w-8 h-8' : 'w-10 h-10'}`}
               >
@@ -391,7 +391,7 @@ export default function ChatInterface({
                   embedded ? 'max-w-[85%] px-3 py-2' : 'max-w-[80%] px-5 py-3'
                 } ${
                   message.sender === 'user'
-                    ? 'bg-gradient-to-br from-univr-red to-univr-red-dark text-white'
+                    ? 'bg-gradient-to-br from-ulss9-primary to-ulss9-primary-dark text-white'
                     : 'glass-panel text-slate-800 dark:text-slate-200'
                 }`}
               >
@@ -556,8 +556,8 @@ export default function ChatInterface({
                   onClick={() => setSelectedCategory(selectedCategory === id ? null : id)}
                   className={`px-3 py-1.5 text-xs font-medium rounded-full border transition-all ${
                     selectedCategory === id
-                      ? 'bg-univr-red text-white border-univr-red dark:bg-univr-red-light dark:border-univr-red-light'
-                      : 'bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-600 text-slate-600 dark:text-slate-400 hover:border-univr-red/50 dark:hover:border-univr-red-light/50'
+                      ? 'bg-ulss9-primary text-white border-ulss9-primary dark:bg-ulss9-primary-light dark:border-ulss9-primary-light'
+                      : 'bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-600 text-slate-600 dark:text-slate-400 hover:border-ulss9-primary/50 dark:hover:border-ulss9-primary-light/50'
                   }`}
                 >
                   {(chosenLanguage === 'en' ? STORE_LABELS_EN[id] : STORE_LABELS[id]) ?? id}
@@ -590,7 +590,7 @@ export default function ChatInterface({
             <button
               type="submit"
               disabled={!inputValue.trim() || isLoading}
-              className="p-2.5 bg-gradient-to-br from-univr-red to-univr-red-dark text-white rounded-lg
+              className="p-2.5 bg-gradient-to-br from-ulss9-primary to-ulss9-primary-dark text-white rounded-lg
                        hover:shadow-lg hover:scale-105 transition-all disabled:opacity-50 disabled:scale-100 shrink-0"
             >
               <svg
@@ -605,7 +605,7 @@ export default function ChatInterface({
           </div>
           {!embedded && (
             <p className="text-center text-xs text-slate-500 mt-2">
-              Assistente ULSS 9 – Powered by <span className="text-univr-red font-medium">Gemini AI</span> con RAG
+              Assistente ULSS 9 – Powered by <span className="text-ulss9-primary dark:text-ulss9-primary-light font-medium">Gemini AI</span> con RAG
             </p>
           )}
         </form>

@@ -21,10 +21,10 @@ export default function ChatWidget({
         type="button"
         onClick={() => setIsOpen((o) => !o)}
         className="fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full shadow-xl
-                   bg-gradient-to-br from-univr-red to-univr-red-dark text-white
+                   bg-gradient-to-br from-ulss9-primary to-ulss9-primary-dark text-white
                    flex items-center justify-center
                    hover:scale-110 hover:shadow-2xl active:scale-95 transition-all duration-200
-                   focus:outline-none focus:ring-4 focus:ring-univr-red/40"
+                   focus:outline-none focus:ring-4 focus:ring-ulss9-primary/40"
         aria-label={isOpen ? 'Chiudi assistente' : 'Apri assistente'}
       >
         {/* Chat bubble / robot icon */}
@@ -55,7 +55,7 @@ export default function ChatWidget({
           aria-label="Assistente chat"
         >
           {/* Widget header – chatbot style */}
-          <div className="flex items-center justify-between px-4 py-3 bg-gradient-to-r from-univr-red to-univr-red-dark text-white shrink-0">
+          <div className="flex items-center justify-between px-4 py-3 bg-gradient-to-r from-ulss9-primary to-ulss9-primary-dark text-white shrink-0">
             <div className="flex items-center gap-2">
               <span className="w-9 h-9 rounded-full bg-white/20 flex items-center justify-center">
                 <svg

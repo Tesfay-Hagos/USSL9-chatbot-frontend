@@ -20,7 +20,7 @@ export default function LandingPage({
       </div>
       <header className="pt-16 pb-8 px-4 text-center">
         <div className="animate-float text-7xl mb-6">🏥</div>
-        <h1 className="text-5xl md:text-6xl font-bold bg-gradient-to-r from-univr-red via-univr-red-dark to-univr-gold bg-clip-text text-transparent mb-4">
+        <h1 className="text-5xl md:text-6xl font-bold bg-gradient-to-r from-ulss9-primary via-ulss9-primary-dark to-ulss9-green bg-clip-text text-transparent mb-4">
           Assistente ULSS 9 Scaligera
         </h1>
         <p className="text-xl text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">
@@ -66,7 +66,7 @@ export default function LandingPage({
       </main>
 
       <footer className="py-4 text-center text-sm text-slate-500 dark:text-slate-500">
-        ULSS 9 Scaligera – Powered by <span className="text-univr-red font-semibold">Gemini AI</span> con RAG
+        ULSS 9 Scaligera – Powered by <span className="text-ulss9-primary font-semibold">Gemini AI</span> con RAG
       </footer>
     </div>
   );

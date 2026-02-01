@@ -14,6 +14,16 @@ const config: Config = {
         'univr-red-light': '#DC2626',
         'univr-red-dark': '#991B1B',
         'univr-gold': '#D4A34A',
+        /* ULSS 9 Scaligera – aulss9.veneto.it style (blue primary, green accent) */
+        'ulss9': {
+          primary: '#0066A1',
+          'primary-dark': '#004D7A',
+          'primary-light': '#0080CC',
+          green: '#00875A',
+          'green-light': '#00A86B',
+          dark: '#1a365d',
+          gray: '#4a5568',
+        },
       },
       animation: {
         'float': 'float 3s ease-in-out infinite',
