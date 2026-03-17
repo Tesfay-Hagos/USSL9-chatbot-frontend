@@ -1,144 +1,139 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* ===== CSS Variables ===== */
-:root {
-  /* UniVR / legacy */
-  --univr-red: #B91C1C;
-  --univr-red-light: #DC2626;
-  --univr-red-dark: #991B1B;
-  --univr-gold: #D4A34A;
-  /* ULSS 9 Scaligera – aulss9.veneto.it style */
-  --ulss9-primary: #0066A1;
-  --ulss9-primary-dark: #004D7A;
-  --ulss9-primary-light: #0080CC;
-  --ulss9-green: #00875A;
-  --ulss9-green-light: #00A86B;
-  --ulss9-dark: #1a365d;
+@layer base {
+  :root {
+    /* Official ULSS 9 palette extracted from aulss9.veneto.it */
+    --ulss9-blue: #005B9A;
+    /* primary nav / header blue */
+    --ulss9-blue-m: #0072be;
+    /* mid blue — hover states */
+    --ulss9-blue-d: #003f6e;
+    /* dark blue — deep surfaces */
+    --ulss9-cyan: #009FD8;
+    /* accent cyan — buttons, highlights */
+    --ulss9-cyan-m: #00b8f0;
+    /* lighter cyan */
+    --ulss9-cyan-l: rgba(0, 159, 216, 0.12);
+    --ulss9-cyan-xl: rgba(0, 159, 216, 0.06);
+    --ulss9-white: #ffffff;
+    --ulss9-off-white: #f5f8fb;
+    --ulss9-light: #eef3f8;
+    --ulss9-border: rgba(0, 91, 154, 0.12);
+    --ulss9-border-m: rgba(0, 91, 154, 0.22);
+    --ulss9-ink: #0a2540;
+    --ulss9-ink-70: rgba(10, 37, 64, 0.70);
+    --ulss9-ink-45: rgba(10, 37, 64, 0.45);
+    --ulss9-ink-20: rgba(10, 37, 64, 0.20);
+    --ulss9-ink-08: rgba(10, 37, 64, 0.08);
+    --ulss9-ink-04: rgba(10, 37, 64, 0.04);
+    --ulss9-orange: #E8681A;
+    /* CTA accent — matches site's orange buttons */
+    --ulss9-orange-l: rgba(232, 104, 26, 0.12);
+
+    --sh-sm: 0 1px 4px rgba(0, 0, 0, 0.06), 0 2px 8px rgba(0, 0, 0, 0.04);
+    --sh-md: 0 4px 20px rgba(0, 91, 154, 0.12), 0 2px 8px rgba(0, 0, 0, 0.06);
+    --sh-lg: 0 20px 60px rgba(0, 91, 154, 0.18), 0 6px 20px rgba(0, 0, 0, 0.08);
+    --r: 14px;
+    --r-s: 9px;
+
+    --font-d: 'Cormorant Garamond', Georgia, serif;
+    --font-b: 'DM Sans', system-ui, sans-serif;
+  }
+
+  body {
+    /* For iframe embed: completely transparent body */
+    background: transparent !important;
+    font-family: var(--font-b);
+  }
 }
 
-/* ===== Base Styles ===== */
-html {
-  scroll-behavior: smooth;
-}
-
-body {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-}
-
-/* ===== Custom Classes ===== */
 @layer components {
-  .glass-panel {
-    @apply bg-white/75 dark:bg-slate-800/75 backdrop-blur-xl;
+
+  /* Scrollbar override for clean UI */
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 3px;
   }
 
-  .domain-card {
-    @apply p-6 rounded-xl text-center transition-all duration-300
-           bg-white dark:bg-slate-800 
-           border border-slate-200 dark:border-slate-700
-           hover:shadow-xl hover:-translate-y-1 hover:border-univr-red/30
-           focus:outline-none focus:ring-2 focus:ring-univr-red focus:ring-offset-2;
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background: var(--ulss9-ink-20);
+    border-radius: 2px;
   }
-}
 
-/* ===== Animations ===== */
-@keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-8px); }
-}
+  /* Keyframe Animations */
+  @keyframes lring {
+    0% {
+      transform: scale(1);
+      opacity: .7;
+    }
 
-@keyframes slide-up {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
+    70%,
+    100% {
+      transform: scale(1.5);
+      opacity: 0;
+    }
   }
-  to {
-    opacity: 1;
-    transform: translateY(0);
+
+  @keyframes dotpulse {
+
+    0%,
+    100% {
+      opacity: 1;
+    }
+
+    50% {
+      opacity: 0.35;
+    }
   }
-}
 
-.animate-float {
-  animation: float 3s ease-in-out infinite;
-}
+  @keyframes mfade {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
 
-.animate-slide-up {
-  animation: slide-up 0.4s ease-out;
-}
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
 
-/* ===== Scrollbar ===== */
-::-webkit-scrollbar {
-  width: 8px;
-}
+  @keyframes td {
 
-::-webkit-scrollbar-track {
-  background: transparent;
-}
+    0%,
+    60%,
+    100% {
+      transform: translateY(0);
+      opacity: .4;
+    }
 
-::-webkit-scrollbar-thumb {
-  @apply bg-slate-300 dark:bg-slate-600 rounded-full;
-}
+    30% {
+      transform: translateY(-6px);
+      opacity: 1;
+    }
+  }
 
-::-webkit-scrollbar-thumb:hover {
-  @apply bg-slate-400 dark:bg-slate-500;
-}
+  @keyframes widgetSpin {
+    from { transform: rotate(0deg); }
+    to   { transform: rotate(360deg); }
+  }
 
-/* ===== Prose adjustments ===== */
-.prose {
-  @apply max-w-none;
-}
+  .animate-lring {
+    animation: lring 3s ease infinite;
+  }
 
-.prose p {
-  @apply mb-2 last:mb-0;
-}
+  .animate-dotpulse {
+    animation: dotpulse 2.2s ease infinite;
+  }
 
-.prose strong {
-  @apply font-semibold;
-}
+  .animate-mfade {
+    animation: mfade 0.24s ease both;
+  }
 
-/* ===== Color utilities ===== */
-.text-univr-red {
-  color: var(--univr-red);
-}
-
-.text-univr-gold {
-  color: var(--univr-gold);
-}
-
-.bg-univr-red {
-  background-color: var(--univr-red);
-}
-
-.from-univr-red {
-  --tw-gradient-from: var(--univr-red) var(--tw-gradient-from-position);
-  --tw-gradient-to: rgb(185 28 28 / 0) var(--tw-gradient-to-position);
-  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
-}
-
-.to-univr-red-dark {
-  --tw-gradient-to: var(--univr-red-dark) var(--tw-gradient-to-position);
-}
-
-.to-univr-gold {
-  --tw-gradient-to: var(--univr-gold) var(--tw-gradient-to-position);
-}
-
-.border-univr-red\/30 {
-  border-color: rgb(185 28 28 / 0.3);
-}
-
-.border-univr-red\/50 {
-  border-color: rgb(185 28 28 / 0.5);
-}
-
-.ring-univr-red {
-  --tw-ring-color: var(--univr-red);
-}
-
-/* Dark mode adjustments for UniVR red */
-.dark .text-univr-red-light {
-  color: var(--univr-red-light);
+  .animate-td {
+    animation: td 1.4s ease infinite;
+  }
 }
