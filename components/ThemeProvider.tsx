@@ -1,6 +1,6 @@
 'use client';
 
-import React, { createContext, useCallback, useContext, useEffect, useRef, useState } from 'react';
+import React, { createContext, useCallback, useContext, useEffect, useState } from 'react';
 
 export type Theme = 'light' | 'dark';
 
@@ -27,13 +27,8 @@ function getInitialTheme(): Theme {
     return 'dark';
 }
 
-// Overlay phases: idle → blurring-in → switching → blurring-out → idle
-type OverlayPhase = 'idle' | 'in' | 'out';
-
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
     const [theme, setThemeState] = useState<Theme>('dark');
-    const [overlay, setOverlay] = useState<OverlayPhase>('idle');
-    const pendingTheme = useRef<Theme | null>(null);
 
     useEffect(() => {
         const t = getInitialTheme();
@@ -42,56 +37,23 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     }, []);
 
     const toggleTheme = useCallback(() => {
-        // If a transition is already running, ignore
-        if (overlay !== 'idle') return;
-
         setThemeState(prev => {
-            pendingTheme.current = prev === 'dark' ? 'light' : 'dark';
-            return prev; // don't switch yet — wait for blur-in
-        });
-
-        // Phase 1: blur in
-        setOverlay('in');
-
-        // Phase 2: switch theme at peak blur (140ms)
-        setTimeout(() => {
-            const next = pendingTheme.current!;
+            const next = prev === 'dark' ? 'light' : 'dark';
+            // Add transition class so all elements animate their colors smoothly
+            document.documentElement.classList.add('theme-switching');
             document.documentElement.setAttribute('data-theme', next);
             localStorage.setItem(STORAGE_KEY, next);
-            setThemeState(next);
-
-            // Phase 3: blur out
-            setOverlay('out');
-
-            // Phase 4: done
-            setTimeout(() => setOverlay('idle'), 180);
-        }, 140);
-    }, [overlay]);
+            // Remove class after transitions finish (matches CSS duration)
+            setTimeout(() => {
+                document.documentElement.classList.remove('theme-switching');
+            }, 300);
+            return next;
+        });
+    }, []);
 
     return (
         <ThemeContext.Provider value={{ theme, toggleTheme }}>
             {children}
-
-            {/* Full-screen blur curtain — covers widget during theme switch */}
-            {overlay !== 'idle' && (
-                <div
-                    aria-hidden="true"
-                    style={{
-                        position: 'fixed',
-                        inset: 0,
-                        zIndex: 999999,
-                        pointerEvents: 'none',
-                        backdropFilter: overlay === 'in' ? 'blur(18px)' : 'blur(0px)',
-                        WebkitBackdropFilter: overlay === 'in' ? 'blur(18px)' : 'blur(0px)',
-                        background: overlay === 'in'
-                            ? 'rgba(120,120,120,0.08)'
-                            : 'transparent',
-                        transition: overlay === 'in'
-                            ? 'backdrop-filter 0.14s ease-in, -webkit-backdrop-filter 0.14s ease-in, background 0.14s ease-in'
-                            : 'backdrop-filter 0.18s ease-out, -webkit-backdrop-filter 0.18s ease-out, background 0.18s ease-out',
-                    }}
-                />
-            )}
         </ThemeContext.Provider>
     );
 }
