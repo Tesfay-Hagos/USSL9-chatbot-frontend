@@ -173,6 +173,7 @@ export default function NewChatWidget() {
 
         setMessages(p => [...p, { id: `u-${Date.now()}`, content: text, sender: 'user', timestamp: new Date() }]);
         setInputValue('');
+        if (inputRef.current) { inputRef.current.style.height = 'auto'; }
         setIsLoading(true);
         setSuggestions([]);
 
@@ -246,7 +247,7 @@ export default function NewChatWidget() {
 
             {/* ── WIDGET WINDOW ── */}
             <div
-                className={`absolute sm:bottom-24 sm:right-6 bottom-0 right-0 flex flex-col rounded-t-[var(--r)] sm:rounded-b-[var(--r)] overflow-hidden bg-[var(--surface)] border border-[var(--border)] shadow-[var(--sh-lg)] sm:w-[392px] w-full sm:h-[640px] h-[92dvh] sm:max-h-[calc(100vh-7.5rem)] pointer-events-auto origin-bottom-right transition-all duration-300 z-[9998] ${isOpen ? 'scale-100 translate-y-0 opacity-100' : 'scale-[0.86] translate-y-4 opacity-0 pointer-events-none'}`}
+                className={`absolute sm:bottom-24 sm:right-6 bottom-0 right-0 flex flex-col rounded-t-[var(--r)] sm:rounded-b-[var(--r)] overflow-hidden bg-[var(--surface)] border border-[var(--border)] shadow-[var(--sh-lg)] sm:w-[var(--widget-w)] w-full sm:h-[var(--widget-h)] h-[92dvh] sm:max-h-[calc(100vh-7.5rem)] pointer-events-auto origin-bottom-right transition-all duration-300 z-[9998] ${isOpen ? 'scale-100 translate-y-0 opacity-100' : 'scale-[0.86] translate-y-4 opacity-0 pointer-events-none'}`}
                 role="dialog" aria-label="Assistente ULSS 9"
             >
                 {/* HEADER */}
@@ -359,9 +360,15 @@ export default function NewChatWidget() {
                                             className={`text-[0.8rem] leading-[1.7] py-[0.68rem] px-[0.9rem] ${m.sender === 'user' ? 'bg-gradient-to-br from-[var(--teal)] to-[#006b64] text-white rounded-[0.9rem_0.25rem_0.9rem_0.9rem] shadow-[0_2px_10px_rgba(0,201,184,0.35)]' : 'bg-[var(--surface)] border border-[var(--border)] text-[var(--text-60)] rounded-[0.25rem_0.9rem_0.9rem_0.9rem] shadow-[var(--sh-sm)]'}`}
                                             dangerouslySetInnerHTML={{ __html: m.content.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>').replace(/\n/g, '<br/>') }}
                                         />
-                                        {m.sender === 'bot' && m.sources?.[0]?.title && (
-                                            <div className="text-[0.61rem] text-[var(--teal)] font-medium flex items-center gap-[0.25rem] pl-[0.1rem]">
-                                                📄 {m.sources[0].title}
+                                        {m.sender === 'bot' && m.sources && m.sources.length > 0 && (
+                                            <div className="flex flex-col gap-[0.15rem] pl-[0.1rem]">
+                                                {m.sources.slice(0, 3).filter(s => s.title).map((s, si) => (
+                                                    <div key={si} className="text-[0.61rem] text-[var(--teal)] font-medium flex items-center gap-[0.25rem]">
+                                                        📄 {s.url
+                                                            ? <a href={s.url} target="_blank" rel="noopener noreferrer" className="underline hover:opacity-75">{s.title}</a>
+                                                            : s.title}
+                                                    </div>
+                                                ))}
                                             </div>
                                         )}
                                     </div>
@@ -397,12 +404,17 @@ export default function NewChatWidget() {
                                     <textarea
                                         ref={inputRef}
                                         value={inputValue}
-                                        onChange={e => setInputValue(e.target.value)}
+                                        onChange={e => {
+                                            setInputValue(e.target.value);
+                                            const t = e.target;
+                                            t.style.height = 'auto';
+                                            t.style.height = Math.min(t.scrollHeight, 120) + 'px';
+                                        }}
                                         onKeyDown={onKey}
                                         disabled={isLoading}
                                         placeholder={tr.inpPh}
                                         rows={1}
-                                        className="w-full bg-transparent border-none outline-none text-[0.81rem] text-[var(--text)] resize-none leading-[1.55] min-h-[22px] max-h-[90px] overflow-y-auto p-0 placeholder-[var(--text-30)] disabled:cursor-not-allowed custom-scrollbar"
+                                        className="w-full bg-transparent border-none outline-none text-[0.81rem] text-[var(--text)] resize-none leading-[1.55] min-h-[22px] max-h-[120px] overflow-y-auto p-0 placeholder-[var(--text-30)] disabled:cursor-not-allowed custom-scrollbar"
                                         data-gramm="false"
                                         data-gramm_editor="false"
                                         data-enable-grammarly="false"

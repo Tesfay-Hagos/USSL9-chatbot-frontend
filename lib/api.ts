@@ -1,7 +1,7 @@
 // Chat API client – backend URL
 // Strip trailing slashes, then ensure path ends at /api/v1
 const _base = (process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000/api').replace(/\/+$/, '');
-const V1_BASE = _base.endsWith('/api') ? `${_base}/v1` : `${_base}/api/v1`;
+const V1_BASE = _base.endsWith('/api/v1') ? _base : _base.endsWith('/api') ? `${_base}/v1` : `${_base}/api/v1`;
 
 export interface ChatRequest {
   message: string;
