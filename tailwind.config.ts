@@ -9,16 +9,12 @@ const config: Config = {
   ],
   theme: {
     extend: {
-      fontFamily: {
-        sans: ['DM Sans', 'system-ui', 'sans-serif'],
-        serif: ['Cormorant Garamond', 'Georgia', 'serif'],
-      },
       colors: {
         'univr-red': '#B91C1C',
         'univr-red-light': '#DC2626',
         'univr-red-dark': '#991B1B',
         'univr-gold': '#D4A34A',
-        /* ULSS 9 Scaligera – aulss9.veneto.it style (blue primary, green accent) */
+        /* ULSS 9 Scaligera – same as chatbot for ownership feeling */
         'ulss9': {
           primary: '#0066A1',
           'primary-dark': '#004D7A',

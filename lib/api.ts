@@ -46,6 +46,7 @@ export interface PublicStoreInfo {
   domain: string;
   display_name: string;
   description: string;
+  is_initial: boolean;
 }
 
 let sessionTokenCache: { token: string; expiresAt: number } | null = null;
