@@ -80,6 +80,7 @@ export default function NewChatWidget() {
 
     const [openSel, setOpenSel] = useState<'lang' | null>(null);
 
+    const [conversationId, setConversationId] = useState<string>(() => crypto.randomUUID());
     const [messages, setMessages] = useState<Message[]>([]);
     const [inputValue, setInputValue] = useState('');
     const [isLoading, setIsLoading] = useState(false);
@@ -165,6 +166,7 @@ export default function NewChatWidget() {
     const newChat = () => {
         setMessages([]);
         setInputValue('');
+        setConversationId(crypto.randomUUID());
         startChat(lang); // Keep current lang, just restart
     };
 
@@ -179,7 +181,7 @@ export default function NewChatWidget() {
 
         try {
             const domainVal = domainKey === 'general' ? null : domainKey;
-            const res = await sendMessage(text, domainVal, lang || 'it');
+            const res = await sendMessage(text, domainVal, lang || 'it', conversationId);
             setMessages(p => [...p, {
                 id: `b-${Date.now()}`,
                 content: res.response,

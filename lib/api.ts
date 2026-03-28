@@ -6,7 +6,7 @@ const V1_BASE = _base.endsWith('/api/v1') ? _base : _base.endsWith('/api') ? `${
 export interface ChatRequest {
   message: string;
   domain: string | null;
-  conversation_id?: string;
+  conversation_id?: string | null;
   language?: string;
 }
 
@@ -76,10 +76,12 @@ export async function sendMessage(
   message: string,
   domain: string | null = null,
   language?: string,
+  conversationId?: string | null,
 ): Promise<ChatResponse> {
   const token = await getSessionToken();
   const body: ChatRequest = { message, domain };
   if (language) body.language = language;
+  if (conversationId) body.conversation_id = conversationId;
   const response = await fetch(`${V1_BASE}/chat`, {
     method: 'POST',
     headers: {
